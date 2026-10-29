@@ -1,0 +1,40 @@
+Package: tidyDCM
+Type: Package
+Title: Tidy Diagnostic Classification Models
+Version: 0.1.900
+Authors@R: c(
+    person(
+      given = c("Beltrán"),
+      family = c("Pantoja", "De Prada"),
+      email = c("beltran.pantoja@uga.edu"),
+      comment = c(ORCID  = "0009-0004-6407-8859"),
+      role = c("aut", "cre")
+    )
+  )
+Description: A tidy workflow for working with Diagnostic Classification Models
+    from a variety of packages. This package main objective is to facilitate
+    the work for researchers and practitioners by extracting the data from 
+    fitted models in a 'tidy' way.
+Suggests:
+    CDM,
+    GDINA,
+    devtools,
+    knitr,
+    rmarkdown,
+    usethis
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr
+Imports: 
+    cli,
+    dplyr (>= 1.1.0),
+    generics,
+    purrr,
+    rlang,
+    stringr,
+    tibble,
+    tidyr,
+    vctrs
+Config/roxygen2/version: 8.1.0
+Roxygen: list(markdown = TRUE)
