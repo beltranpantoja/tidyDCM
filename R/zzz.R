@@ -6,7 +6,8 @@
   if (grepl("\\.9001$", as.character(pkg_version))) {
     welcome_msg <- paste0(
       welcome_msg,
-      "Development version. Use with caution!"
+      "Development version. Use with caution!",
+      Sys.Date()
     )
   }
 
