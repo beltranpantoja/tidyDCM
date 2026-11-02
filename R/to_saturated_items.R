@@ -27,12 +27,12 @@ to_saturated_items <- function(
     select("number", "item", "rule", "term", "order") |>
     left_join(
       item_parameters |>
-        select("number", "item", "term", "estimate") |>
+        select("item", "term", "estimate") |>
         # This converts DINO into main effects
         tidyr::separate_longer_delim(
           .data$term, "|"
         ),
-      by = dplyr::join_by("number", "item", "term")
+      by = dplyr::join_by("item", "term")
     ) |>
     mutate(
       estimate = tidyr::replace_na(.data$estimate, 0)
