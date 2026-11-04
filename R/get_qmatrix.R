@@ -184,22 +184,23 @@ qvector_from_terms <- function(
     stringr::str_split(terms, "-|\\|") |>
     purrr::map(as.integer)
 
-  num_attrs <- term_vectors |> unlist() |> max()
+  # Distinct attributes actually used, sorted
+  attrs <- term_vectors |> unlist() |> setdiff(0L) |> sort()
+  num_attrs <- length(attrs)
 
-  # Check if null
   if (is.null(attr_labels)) {
-    attr_labels <- paste0(attr_label_prefix, seq_len(num_attrs))
+    # Keep the original attribute number in the name
+    attr_labels <- paste0(attr_label_prefix, attrs)
+  } else if (length(attr_labels) != num_attrs) {
+    cli::cli_abort(
+      "{.arg attr_labels} has length {length(attr_labels)}, but {num_attrs} attribute{?s} appear in {.arg terms}."
+    )
   }
 
   purrr::map(
-    seq_len(num_attrs),
-    \(k) purrr::map_int(
-      term_vectors,
-      \(p) (k %in% p)
-      )
-    ) |>
+    attrs,
+    \(k) purrr::map_int(term_vectors, \(p) as.integer(k %in% p))
+  ) |>
     rlang::set_names(attr_labels) |>
-    as_tibble()
-
-
+    tibble::as_tibble()
 }
